@@ -22,5 +22,6 @@ objdump <option(s)> <file(s)>
 
 * `-s`：显示指定section的完整内容。默认所有的非空section都会被显示
 * `-d`：从objfile中反汇编那些特定指令机器码的section
+* `-D`：从objfile中反汇编那些所有指令机器码的section
 * `-M intel`： 选择intel语法模式
 
