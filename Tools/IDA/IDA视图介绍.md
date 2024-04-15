@@ -29,7 +29,7 @@
 
 ## 3导出窗口 Exports
 
-列出了文件的入口点
+列出了文件的入口点，以及任何由文件导出给其他文件使用的函数和变量
 
 
 
@@ -50,4 +50,4 @@
 * View->Open Subviews 恢复无意关闭的数据窗口
 * Window->Reset Desktop 将桌面恢复原始布局
 * Windows->Save Desktop 保存桌面布局
-* Windows->Load Desktop 打开之前博爱村的一个桌面布局
+* Windows->Load Desktop 打开之前保存的一个桌面布局
