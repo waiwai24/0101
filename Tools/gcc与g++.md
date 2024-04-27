@@ -45,6 +45,7 @@ gcc hello.c -o hello -save-temps
 - `-c`：对文件进行汇编
 - `-o`：指定输出文件名
 - `-save-temps` ： Do not delete intermediate files.
+- `m32`：编译32位程序命令
 
 
 
