@@ -36,7 +36,7 @@ b.out: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically link
 
 
 
-* 调试无参数程序：
+* 调试无参数程序： 
 
   ```bash
   gdb file.o
@@ -97,11 +97,65 @@ b.out: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically link
 * 打印指针指向内容：
   * p *d  (如果不加\*则打印出指针地址)（打印出第一个值）
   * p *d@10  (解引用打印多个值@后跟上要打印的长度或变量值)
+* 按照特定格式打印变量：
+  * x 十六进制格式
+  * d 十进制格式
+  * u 十六进制格式显示无符号整型
+  * c 按字符格式
+  * f 按浮点数格式 
+  * t 按二进制格式
+
+
+```
+(gdb) p c
+$18 = "hello,shouwang"
+(gdb) p/x c
+$19 = {0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x2c, 0x73, 0x68, 0x6f, 0x75, 0x77, 0x61, 0x6e, 0x67, 0x0}
+
+```
+
+* 查看内存内容：
+  * 语法：`x/[n][f][u] addr`
+  * x：examine检查内存
+  * n：要显示的内存单元数，默认为1
+  * f：表示要打印的格式
+  * u：要打印的单元长度
+  * addr：内存地址
+
+```
+(gdb) x/4tb &e
+0x7fffffffdbd4:    00000000    00000000    00001000    01000001
+变量e的四个字节都以二进制的方式打印出来了
+```
+
+* 查看寄存器的值：info registers
 
 
 
 ## 4.单步调试
 
+* 单步执行next，简写n，用于程序断住后，继续执行下一条语句，后面跟上数字num，表示执行该命令num次
+* 单步进入step，简写s，可以单步跟踪到函数内部
+* 继续执行到下一个断点continue，简写c，他会执行程序直到再次遇到断点处
+
+
+
 ## 5.源码查看
 
-6.
+* list：将源码列出来，简写l
+  * 后面可以跟行号，表示要列出附近的源码
+  * 后面跟函数名，列出指定函数附近的源码
+  * 设置源码一次列出行数，set listsize num
+  * 列出指定行之间的源码，list first，last
+
+
+
+## 6.反汇编
+
+反汇编只能在运行过程中使用
+
+* 反汇编main函数
+
+  ```
+  disassemble main
+  ```
