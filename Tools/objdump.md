@@ -25,3 +25,6 @@ objdump <option(s)> <file(s)>
 * `-D`：从objfile中反汇编那些所有指令机器码的section
 * `-M intel`： 选择intel语法模式
 
+
+
+解释：VMA 表示Virtual Memory Address, 即虚拟地址，LMA 表示 Load Memory  Address，即加载地址，正常情况下这两个值应该是一样的，但是在有些嵌入式系统中，特别是在那些程序放在 ROM 的系统中时，LMA 和 VMA 是不相同的
