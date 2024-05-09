@@ -44,6 +44,11 @@ gcc hello.c -o hello -save-temps
 
 - `-c`：对文件进行汇编
 - `-o`：指定输出文件名
+- `-g`：保留调试信息
+- `-O0`	不进行优化处理
+- `-O 或 -O`：优化生成代码
+- `-O2`：进一步优化。
+- `-O3`：比 -O2 更进一步优化，包括 inline 函数。
 - `-save-temps` ： Do not delete intermediate files.
 - `m32`：编译32位程序命令
 
