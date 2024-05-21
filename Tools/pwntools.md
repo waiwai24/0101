@@ -6,7 +6,7 @@ from pwm import *
 
 注意：py3使用时确保所有字符串都有个`b`前缀，因为但是python2的str类型时bytes类型，但python3时是Unicode类型，和bytes类型有区别
 
-tips：使用ipython可以方便查看各自模块和函数的详细使用用法`? liste`
+tips：使用ipython可以方便查看各自模块和函数的详细使用用法`? name`
 
 
 
