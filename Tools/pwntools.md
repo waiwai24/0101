@@ -117,3 +117,6 @@ ContextType(arch = 'arm', bits = 32, endian = 'little', os = 'linux')
    0:   b8 01 00 00 00          mov    eax, 0x1
 ```
 
+
+
+## 6.联动GDB调试
