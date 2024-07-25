@@ -51,6 +51,7 @@ gcc hello.c -o hello -save-temps
 - `-O3`：比 -O2 更进一步优化，包括 inline 函数。
 - `-save-temps` ： Do not delete intermediate files.
 - `m32`：编译32位程序命令
+- `-fno-stack-protector` 
 
 
 
