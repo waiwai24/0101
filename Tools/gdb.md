@@ -14,7 +14,7 @@ Reading symbols from helloWorld...(no debugging symbols found)...done.
 ```
 
 如果没有调试信息，会提示no debugging symbols found。
-如果是下面的提示：
+如果有则是下面的提示：
 
 ```text
 Reading symbols from helloWorld...done.
@@ -33,8 +33,6 @@ a.out: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically link
 └─$ file b.out
 b.out: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=e401563630cf931a9f85530f828e98030b01b317, for GNU/Linux 3.2.0, not stripped
 ```
-
-
 
 * 调试无参数程序： 
 
@@ -71,6 +69,8 @@ b.out: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically link
 * 根据行号设置：b num
 
 * 根据函数名设置：b func
+
+* 根据地址设置：b *0x12345678
 
 * 根据条件设置： break test.c:23 if b==0 (当b为0时会在23行断住)
 
@@ -150,23 +150,34 @@ $19 = {0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x2c, 0x73, 0x68, 0x6f, 0x75, 0x77, 0x61, 0
   
   * addr：内存地址
 
-```
-(gdb) x/4tb &e
-0x7fffffffdbd4:    00000000    00000000    00001000    01000001
-变量e的四个字节都以二进制的方式打印出来了
-```
+    ```
+	  (gdb) x/4tb &e
+	  0x7fffffffdbd4:    00000000    00000000    00001000    01000001
+	  变量e的四个字节都以二进制的方式打印出来了
+    ```
 
 * 查看寄存器的值：info registers
+* 查看函数：info functions
+* 直接调用函数执行：call function 或 print function
 
 
 
 ## 4.单步调试
 
 * 单步执行next，简写n，用于程序断住后，继续执行下一条语句，后面跟上数字num，表示执行该命令num次,当你执行到某个函数时，不会进入该函数内部，而是直接执行完该函数，然后继续执行下一行代码。
+
 * 单步进入step，简写s，可以单步跟踪到函数内部
+
 * 继续执行到下一个断点continue，简写c，他会执行程序直到再次遇到断点处
+
 * until（简写u）：当你厌倦了在一个循环体内单步跟踪时，这个命令可以运行程序直到退出循环体
   until+行号： 运行至某行，不仅仅用来跳出循环
+  
+* finish 继续执行直到当前选定栈帧上的函数返回
+
+* return 取消函数调用的执行
+
+  return expression 如果指定一个 expression 表达式参数，其值将是此函数的返回值
 
 ```
 next   单步到程序源代码的下一行，不进入函数。
@@ -197,3 +208,12 @@ stepi （si）单步一条机器指令。
   disassemble main
   disass main
   ```
+
+
+
+## 7.插件
+
+### 7.1 pwndgb
+
+* telescope -addr count：从指定地址开始递归地解引用指针（默认为$esp），计数值默认为8
+* vmmap：查看程序各种段的地址和范围

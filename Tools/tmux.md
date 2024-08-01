@@ -24,3 +24,16 @@
   * 使用会话名称`tmux attach -t <session-name>`
 * `tmux kill-session -t`：杀死会话
 * `tmux switch -t`：切换会话
+
+
+
+## 3.快捷键
+
+都是`ctrl+b+快捷键`
+
+* %：分成左右两个窗口
+* ”：分成上下两个窗口
+* o：光标切换到下一个窗口
+* {：左移当前窗口
+* }：右移当前窗口
+* space：切换窗口布局
