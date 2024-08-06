@@ -159,6 +159,18 @@ $19 = {0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x2c, 0x73, 0x68, 0x6f, 0x75, 0x77, 0x61, 0
 * 查看寄存器的值：info registers
 * 查看函数：info functions
 * 直接调用函数执行：call function 或 print function
+* set 修改运行时变量内容，也可以直接set地址指定的值
+
+  ```
+  set var variable=value
+  ```
+* 设定程序运行时的参数
+
+  ```
+  set args arg1 arg2 ...
+  ```
+
+  
 
 
 
@@ -187,6 +199,8 @@ stepi （si）单步一条机器指令。
 ```
 
 * reverse-调试方法，可以反向调试
+
+
 
 ## 5.源码查看
 

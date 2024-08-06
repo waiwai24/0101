@@ -160,9 +160,9 @@ gdb.attach(target, gdbscript=None)
 
 ELF文件有几组不同的符号表可用，每组都包含在`{name: data}`的字典中
 
-- `ELF.symbols` 列出所有已知的符号，包括下面的符号。优先考虑PLT条目，而不是GOT条目。
-- `ELF.got` 只包含GOT表
-- `ELF.plt` 只包含PLT表
+- `ELF.symbols[]` 列出所有已知的符号，包括下面的符号。优先考虑PLT条目，而不是GOT条目。
+- `ELF.got[]` 只包含GOT表
+- `ELF.plt[]` 只包含PLT表
 - `ELF.functions` 只包含函数符号表（需要DWARF符号表）
 
 ```python
@@ -188,3 +188,9 @@ ELF文件有几组不同的符号表可用，每组都包含在`{name: data}`的
 ## 8.其他
 
 * `cyclic(len)`：生成指定长度的数据
+* `fmtstr_payload(offset, {address:data}, numbwritten=0, write_size='byte')`
+  * 自动生成格式化字符串 paylod
+  * offset 表示格式化字符串的偏移
+  * {address:data} 表示在address写入data
+  * numbwritten 表示已经输出的字符个数
+  * write_size 表示写入方式，是按字节（byte）、按双字节（short）还是按四字节（int），对应着hhn、hn和n，默认值是byte，即按hhn写
