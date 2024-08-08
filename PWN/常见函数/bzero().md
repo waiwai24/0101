@@ -1,4 +1,4 @@
-# bzero函数
+# bzero
 
 ```
  void bzero(void *s, int n);

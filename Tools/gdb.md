@@ -157,22 +157,26 @@ $19 = {0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x2c, 0x73, 0x68, 0x6f, 0x75, 0x77, 0x61, 0
     ```
 
 * 查看寄存器的值：info registers
+
 * 查看函数：info functions
+
 * 直接调用函数执行：call function 或 print function
+
 * set 修改运行时变量内容，也可以直接set地址指定的值
 
   ```
   set var variable=value
   ```
+  
 * 设定程序运行时的参数
 
   ```
   set args arg1 arg2 ...
   ```
 
-  
+* set一般只能修改4字节，如果要修改8字节，就要强制类型转换
 
-
+  例子：`set *(long long*)0x7fffffffdf18=0x1234567812345678` 的意思是：将内存地址 `0x7fffffffdf18` 强制解释为一个 `long long` 类型的指针，然后通过间接引用操作符 `*` 来访问或修改这个地址处的 `long long` 值
 
 ## 4.单步调试
 
@@ -225,9 +229,25 @@ stepi （si）单步一条机器指令。
 
 
 
-## 7.插件
+## 7.插件及其他
+
+* 代码分屏快捷键：ctrl x + a
 
 ### 7.1 pwndgb
 
 * telescope -addr count：从指定地址开始递归地解引用指针（默认为$esp），计数值默认为8
 * vmmap：查看程序各种段的地址和范围
+* cyclic：生成的字符串每四个字符为一组，以aaaa开始，最长到zzzz
+
+  ```
+  $ cyclic 128    
+  aaaabaaacaaadaaaeaaafaaagaaahaaaiaaajaaakaaalaaamaaanaaaoaaapaaaqaaaraaasaaataaauaaavaaawaaaxaaayaaazaabbaabcaabdaabeaabfaabgaab
+  ```
+
+  ```
+  可计算出栈溢出的长度
+  pwndbg> cyclic -l 'gaaa'
+  24
+  ```
+
+  

@@ -1,4 +1,4 @@
-# scanf()函数
+# scanf()
 
 ```c
 int scanf(const char *format, ...)

@@ -188,6 +188,7 @@ ELF文件有几组不同的符号表可用，每组都包含在`{name: data}`的
 ## 8.其他
 
 * `cyclic(len)`：生成指定长度的数据
+* `b *$rebase(0x相对基址偏移)` 是 pwngdb 中的一个调试命令，用于在基地址重定位后设置断点
 * `fmtstr_payload(offset, {address:data}, numbwritten=0, write_size='byte')`
   * 自动生成格式化字符串 paylod
   * offset 表示格式化字符串的偏移

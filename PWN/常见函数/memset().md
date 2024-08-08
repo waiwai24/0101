@@ -1,4 +1,4 @@
-# memset()函数
+# memset()
 
 
 
@@ -11,3 +11,4 @@ void *memset(void *str, int c, size_t n)
 - 头文件：C中`#include<string.h>`，C++中`#include<cstring>`
 
 * 注意：memset赋值的时候是按字节赋值，是将参数化成二进制之后填入一个字节
+
