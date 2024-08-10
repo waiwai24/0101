@@ -4,7 +4,7 @@
 from pwm import *
 ```
 
-注意：py3使用时确保所有字符串都有个`b`前缀，因为但是python2的str类型是bytes类型，但python3时是Unicode类型，和bytes类型有区别
+注意：py3使用时确保所有字符串都有个`b`前缀，因为python2的str类型是bytes类型，但python3时是Unicode类型，和bytes类型有区别
 
 tips：使用ipython可以方便查看各自模块和函数的详细使用用法`? name`
 
@@ -42,7 +42,7 @@ tips：使用ipython可以方便查看各自模块和函数的详细使用用法
 发送数据
 
 * `send(data)`：发送数据
-* `sendline(data)`：发送一行数据，默认在行尾加\n
+* `sendline(data)`：发送一行数据，默认在行尾加\n，也就是0xa
 * `sendafter(some_string, payload)`：接收到 some_string 后, 发送你的 payload
 * `close()`：关闭管道
 
@@ -54,8 +54,8 @@ tips：使用ipython可以方便查看各自模块和函数的详细使用用法
 
 打包/解包任意长度的整数，默认小端，添加参数`endian`,`signed`可以设置端序和是否带符号 
 
-* `p16()`，`p32()`：打包16/32位的整数
-* `u16()`，`u32()`：解包16/32位的整数
+* `p16()`，`p32()`：打包16/32位的整数，将整数打包为相对应位数的地址表示方式
+* `u16()`，`u32()`：解包16/32位的整数，把\x\x码重新变为整数
 
 ```python
 >>> p32(0xdeadbeef)
@@ -173,7 +173,9 @@ ELF文件有几组不同的符号表可用，每组都包含在`{name: data}`的
     Stack:    Canary found
     NX:       NX enabled
     PIE:      PIE enabled
->>> print hex(e.address) #文件装载基地址
+>>> print hex(e.address) 
+#文件装载基地址,如果二进制文件没有启用PIE，那么它是绝对地址;如果启用了，所有地址都是相对地址
+#设置address值会自动更新symbols、got、plt和functions的地址，这使得它在调整PIE或ASLR时非常有用
 0x400000
 >>> print hex(e.symbols['write'])
 0x401680
@@ -189,6 +191,7 @@ ELF文件有几组不同的符号表可用，每组都包含在`{name: data}`的
 
 * `cyclic(len)`：生成指定长度的数据
 * `b *$rebase(0x相对基址偏移)` 是 pwngdb 中的一个调试命令，用于在基地址重定位后设置断点
+* `log.info()`：打印状态信息
 * `fmtstr_payload(offset, {address:data}, numbwritten=0, write_size='byte')`
   * 自动生成格式化字符串 paylod
   * offset 表示格式化字符串的偏移
