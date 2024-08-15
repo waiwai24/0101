@@ -147,7 +147,7 @@ context.log_level = "info"  #默认
 ## 6.联动GDB调试 
 
 ```python
-启动一个进程(推荐使用)
+启动一个进程，并且停在第一条指令(推荐使用)
 io = gdb.debug("/bin/bash", gdbscript='continue')
 
 附加到一个进程，target可以是pid也可以是process
@@ -191,6 +191,13 @@ ELF文件有几组不同的符号表可用，每组都包含在`{name: data}`的
 
 * `cyclic(len)`：生成指定长度的数据
 * `b *$rebase(0x相对基址偏移)` 是 pwngdb 中的一个调试命令，用于在基地址重定位后设置断点
+* `flat`函数可以将一个列表（或其他可迭代对象）中的元素转换为二进制字符串，并将这些字符串连续拼接起来。这对于在二进制漏洞利用中构造包含多个数据块的payload特别有用
+
+  ```python
+  In [1]: flat([1,2],endianness = 'little', word_size = 32, sign = False)                                                       Out[1]: b'\x01\x00\x00\x00\x02\x00\x00\x00'
+  
+  In [2]: flat([1,2],word_size=64)                                                                                             Out[2]: b'\x01\x00\x00\x00\x00\x00\x00\x00\x02\x00\x00\x00\x00\x00\x00\x00'
+  ```
 * `log.info()`：打印状态信息
 * `fmtstr_payload(offset, {address:data}, numbwritten=0, write_size='byte')`
   * 自动生成格式化字符串 paylod

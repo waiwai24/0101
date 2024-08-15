@@ -64,6 +64,15 @@ b.out: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically link
 
 * 程序执行过程中使用 run 或者 start 指令，表示的是重新启动程序
 
+日志记录：
+
+```shell
+set logging file gdb_log.txt  
+set logging on  
+```
+
+
+
 ## 2.断点设置
 
 * 根据行号设置：b num
