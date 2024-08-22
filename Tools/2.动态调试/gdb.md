@@ -246,9 +246,9 @@ stepi （si）单步一条机器指令。
 
 * `b *$rebase(偏移)`:PIE开启情况下下断点
 
-* telescope -addr count：从指定地址开始递归地解引用指针（默认为$esp），计数值默认为8
-* vmmap：查看程序各种段的地址和范围
-* cyclic：生成的字符串每四个字符为一组，以aaaa开始，最长到zzzz
+* `telescope -addr count`：从指定地址开始递归地解引用指针（默认为$esp），计数值默认为8
+* `vmmap`：查看程序各种段的地址和范围
+* `cyclic n`：生成的字符串每四个字符为一组，以aaaa开始，最长到zzzz
 
   ```
   $ cyclic 128    
