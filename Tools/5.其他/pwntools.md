@@ -34,7 +34,7 @@ tips：使用ipython可以方便查看各自模块和函数的详细使用用法
 
 * `recv(num,timeout=default)`：接收指定数量的可用字节
 * `recvall()`：接受数据直到EOF
-* `recvline()`：接受一行数据直到遇到换行
+* `recvline()`：接受一行数据直到遇到换行，设置参数 keepends = False 可不保留 \n
 * `recvuntil(delims, timeout=default)`：接收数据直到 delims 出现
 * `recvrepeat(timeout)`：继续接收数据，直到发生超时
 * `clean()`：丢弃所有缓冲的数据
