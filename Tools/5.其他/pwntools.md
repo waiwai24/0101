@@ -199,6 +199,12 @@ ELF文件有几组不同的符号表可用，每组都包含在`{name: data}`的
   In [2]: flat([1,2],word_size=64)                                                                                             Out[2]: b'\x01\x00\x00\x00\x00\x00\x00\x00\x02\x00\x00\x00\x00\x00\x00\x00'
   ```
 * `log.info()`：打印状态信息
+* `FmtStr(execute_fmt, offset=None, padlen=0, numbwritten=0)`
+
+  * execute_fmt(function)：与漏洞进程进行交互的函数；
+  * offset(int)：控制的第一个格式化程序的偏移量
+  * padlen(int)：在payload之前添加的pad的大小
+  * numbwritten(int)：已经写入的字节数
 * `fmtstr_payload(offset, {address:data}, numbwritten=0, write_size='byte')`
   * 自动生成格式化字符串 paylod
   * offset 表示格式化字符串的偏移
