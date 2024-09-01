@@ -144,7 +144,7 @@ context.log_level = "info"  #默认
 
 
 
-## 6.联动GDB调试 
+## 6.联动GDB调试
 
 ```python
 启动一个进程，并且停在第一条指令(推荐使用)
@@ -160,7 +160,7 @@ gdb.attach(target, gdbscript=None)
 
 ELF文件有几组不同的符号表可用，每组都包含在`{name: data}`的字典中
 
-- `ELF.symbols[]` 列出所有已知的符号，包括下面的符号。优先考虑PLT条目，而不是GOT条目。
+- `ELF.symbols[]` 列出所有已知的符号，包括下面的符号(符号可以是变量、函数、或其他常量)。优先考虑PLT条目，而不是GOT条目。
 - `ELF.got[]` 只包含GOT表
 - `ELF.plt[]` 只包含PLT表
 - `ELF.functions` 只包含函数符号表（需要DWARF符号表）
