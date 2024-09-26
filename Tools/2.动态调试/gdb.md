@@ -27,11 +27,11 @@ Reading symbols from helloWorld...done.
 ```shell
 ┌──(waiwai㉿kali)-[/home/ctf/pwn/int_overflow]
 └─$ file a.out 
-a.out: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=612336f334e5e5d4b5775e89a8c1716c5eac0ee0, for GNU/Linux 3.2.0, with debug_info, not stripped
+a.out： ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=612336f334e5e5d4b5775e89a8c1716c5eac0ee0, for GNU/Linux 3.2.0, with debug_info, not stripped
                                                                                                                                         
 ┌──(waiwai㉿kali)-[/home/ctf/pwn/int_overflow]
 └─$ file b.out
-b.out: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=e401563630cf931a9f85530f828e98030b01b317, for GNU/Linux 3.2.0, not stripped
+b.out： ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=e401563630cf931a9f85530f828e98030b01b317, for GNU/Linux 3.2.0, not stripped
 ```
 
 * 调试无参数程序： 
@@ -81,9 +81,9 @@ set logging on
 
 * 根据地址设置：b *0x12345678
 
-* 根据条件设置： break test.c:23 if b==0 (当b为0时会在23行断住)
+* 根据条件设置： break test.c：23 if b==0 (当b为0时会在23行断住)
 
-* 设置临时断点：tbreak test.c:23
+* 设置临时断点：tbreak test.c：23
 
 * 跳过多次设置断点：ignore 1 30 (1是忽略的断点号，30是要跳过的次数)
 
@@ -108,7 +108,7 @@ set logging on
 
 ## 3.变量查看
 
-* 打印print基本类型变量，数组，字符：p a(变量名)，p ‘main’::a
+* 打印print基本类型变量，数组，字符：p a(变量名)，p ‘main’：：a
 * 打印指针指向内容：
   * p *d  (如果不加\*则打印出指针地址)（打印出第一个值）
   * p *d@10  (解引用打印多个值@后跟上要打印的长度或变量值)
@@ -161,7 +161,7 @@ $19 = {0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x2c, 0x73, 0x68, 0x6f, 0x75, 0x77, 0x61, 0
 
     ```
 	  (gdb) x/4tb &e
-	  0x7fffffffdbd4:    00000000    00000000    00001000    01000001
+	  0x7fffffffdbd4：    00000000    00000000    00001000    01000001
 	  变量e的四个字节都以二进制的方式打印出来了
     ```
 
@@ -241,10 +241,27 @@ stepi （si）单步一条机器指令。
 ## 7.插件及其他
 
 * 代码分屏快捷键：ctrl x + a
+* 查看源码搜索路径：show directories
+* directory path：指定源文件目录(源码调试时)，也可以在开始gdb时使用 gdb -d path 指定源文件路径
+* show debug-file-directory
+* set debug-file-directory directories：方法只是该次有效，当重新gdb调试时需要再次设置
+* layout：用于分割窗口，可以一边查看代码，一边测试。主要有以下几种用法：
+* layout src：显示源代码窗口
+* layout asm：显示汇编窗口
+* layout regs：显示源代码/汇编和寄存器窗口
+* layout split：显示源代码和汇编窗口
+* layout next：显示下一个layout
+* layout prev：显示上一个layoutCtrl + L：刷新窗口
+* Ctrl + x，再按1：单窗口模式，显示一个窗口
+* Ctrl + x，再按2：双窗口模式，显示两个窗口
+* Ctrl + x，再按a：回到传统模式，即退出layout，回到执行layout之前的调试窗口
+* backtrace：(简写bt)可以查看程序的调用栈。-full 参数可完整打印
 
-### 7.1 pwndgb
+### 7.1 pwndbg
 
-* `b *$rebase(偏移)`:PIE开启情况下下断点
+* `b *$rebase(偏移)`：PIE开启情况下下断点
+
+* `codebase`：打印PIE偏移
 
 * `telescope -addr count`：从指定地址开始递归地解引用指针（默认为$esp），计数值默认为8
 * `vmmap`：查看程序各种段的地址和范围
@@ -261,4 +278,25 @@ stepi （si）单步一条机器指令。
   24
   ```
 
-  
+* `vis_heap_chunks [count] [address]`：简写vis，在指定的地址上可视化堆块
+
+* `arena`：显示arena的详细信息,过于详细
+
+* `arenas`：显示所有arena的基本信息
+
+* `arenainfo`：好看的显示所有arena的信息
+
+- `bins`：查看所有种类的堆块的链表情况
+- `fastbins`：单独查看fastbins的链表情况
+- `largebins`：同上，单独查看largebins的链表情况
+- `smallbins`：同上，单独查看smallbins的链表情况
+- `unsortedbin`：同上，单独查看unsortedbin链表情况
+- `tcachebins`：同上，单独查看tcachebins的链表情况
+- `tcache`：查看tcache详细信息
+- `heap`：数据结构的形式显示所有堆块，会显示一大堆
+- `heap -v`：查看完整数据结构
+- `parseheap`：显示堆结构，很好用，与heap大同小异
+- `mp`：查看堆相关结构体信息
+- `heapbase`：查看堆起始地址
+- `heapinfo、heapinfoall`：显示堆的信息，和bins的挺像的，没bins好用
+- `tracemalloc`：好用，会跟提示所有操作堆的地方
