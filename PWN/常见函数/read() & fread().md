@@ -13,6 +13,7 @@ ssize_t read(int fd, void *buf, size_t count)
 * 读取打开文件的count字节保存到buf缓冲区，返回实际读取的字节数
 * 头文件：#include <unistd.h>
 * fd=0，代表标准输入流；File Descriptor (FD)：stdin = 0、stdout = 1、stderr = 2
+* 文件描述符0-2都是保留的用于缓冲区,在orw中，read第一个打开文件的文件描述符必定是3，后面打开的文件以此类推4，5...
 
 
 

@@ -2,7 +2,15 @@
 
 ## 1.原理
 
+Address Space Layout Randomization
+
 ASLR 是系统级别的地址随机。通过修改 /proc/sys/kernel/randomize_va_space 的值可以控制ASLR 的级别：
+
+```
+下面命令都可以查看保护级别
+sysctl -a --pattern randomize
+cat /proc/sys/kernel/randomize_va_space
+```
 
 * 0：关闭 ASLR
 * 1：栈基址，共享库，mmap 基址随机
