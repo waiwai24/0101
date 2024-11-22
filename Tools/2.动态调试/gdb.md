@@ -238,45 +238,7 @@ stepi （si）单步一条机器指令。
 
 
 
-## 7.插件及其他
-
-* 代码分屏快捷键：ctrl x + a
-* 查看源码搜索路径：show directories
-* directory path：指定源文件目录(源码调试时)，也可以在开始gdb时使用 gdb -d path 指定源文件路径
-* show debug-file-directory
-* set debug-file-directory directories：方法只是该次有效，当重新gdb调试时需要再次设置
-* layout：用于分割窗口，可以一边查看代码，一边测试。主要有以下几种用法：
-* layout src：显示源代码窗口
-* layout asm：显示汇编窗口
-* layout regs：显示源代码/汇编和寄存器窗口
-* layout split：显示源代码和汇编窗口
-* layout next：显示下一个layout
-* layout prev：显示上一个layoutCtrl + L：刷新窗口
-* Ctrl + x，再按1：单窗口模式，显示一个窗口
-* Ctrl + x，再按2：双窗口模式，显示两个窗口
-* Ctrl + x，再按a：回到传统模式，即退出layout，回到执行layout之前的调试窗口
-* backtrace：(简写bt)可以查看程序的调用栈。-full 参数可完整打印
-
-### 7.1 pwndbg
-
-* `b *$rebase(偏移)`：PIE开启情况下下断点
-
-* `codebase`：打印PIE偏移
-
-* `telescope -addr count`：从指定地址开始递归地解引用指针（默认为$esp），计数值默认为8
-* `vmmap`：查看程序各种段的地址和范围
-* `cyclic n`：生成的字符串每四个字符为一组，以aaaa开始，最长到zzzz
-
-  ```
-  $ cyclic 128    
-  aaaabaaacaaadaaaeaaafaaagaaahaaaiaaajaaakaaalaaamaaanaaaoaaapaaaqaaaraaasaaataaauaaavaaawaaaxaaayaaazaabbaabcaabdaabeaabfaabgaab
-  ```
-
-  ```
-  可计算出栈溢出的长度
-  pwndbg> cyclic -l 'gaaa'
-  24
-  ```
+## 7.堆相关
 
 * `vis_heap_chunks [count] [address]`：简写vis，在指定的地址上可视化堆块
 
@@ -300,3 +262,47 @@ stepi （si）单步一条机器指令。
 - `heapbase`：查看堆起始地址
 - `heapinfo、heapinfoall`：显示堆的信息，和bins的挺像的，没bins好用
 - `tracemalloc`：好用，会跟提示所有操作堆的地方
+
+## 8.插件及其他
+
+* 代码分屏快捷键：ctrl x + a
+* 查看源码搜索路径：show directories
+* directory path：指定源文件目录(源码调试时)（通常指定glibc源码路径），也可以在开始gdb时使用 gdb -d path 指定源文件路径
+* show debug-file-directory
+* set debug-file-directory directories：指定带调试信息共享库所在目录，也就是对应glibc版本的.debug目录，方法只是该次有效，当重新gdb调试时需要再次设置
+* layout：用于分割窗口，可以一边查看代码，一边测试。主要有以下几种用法：
+* layout src：显示源代码窗口
+* layout asm：显示汇编窗口
+* layout regs：显示源代码/汇编和寄存器窗口
+* layout split：显示源代码和汇编窗口
+* layout next：显示下一个layout
+* layout prev：显示上一个layoutCtrl + L：刷新窗口
+* Ctrl + x，再按1：单窗口模式，显示一个窗口
+* Ctrl + x，再按2：双窗口模式，显示两个窗口
+* Ctrl + x，再按a：回到传统模式，即退出layout，回到执行layout之前的调试窗口
+* backtrace：(简写bt)可以查看程序的调用栈。-full 参数可完整打印
+
+### 8.1 pwndbg
+
+* `b *$rebase(偏移)`：PIE开启情况下下断点
+
+* `codebase`：打印PIE偏移
+
+* `telescope -addr count`：从指定地址开始递归地解引用指针（默认为$esp），计数值默认为8
+
+* `vmmap`：查看程序各种段的地址和范围
+
+* `cyclic n`：生成的字符串每四个字符为一组，以aaaa开始，最长到zzzz
+
+  ```
+  $ cyclic 128    
+  aaaabaaacaaadaaaeaaafaaagaaahaaaiaaajaaakaaalaaamaaanaaaoaaapaaaqaaaraaasaaataaauaaavaaawaaaxaaayaaazaabbaabcaabdaabeaabfaabgaab
+  ```
+
+  ```
+  可计算出栈溢出的长度
+  pwndbg> cyclic -l 'gaaa'
+  24
+  ```
+
+  

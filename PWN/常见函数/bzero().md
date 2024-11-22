@@ -1,4 +1,4 @@
-# bzero
+# bzero()
 
 ```
  void bzero(void *s, int n);
