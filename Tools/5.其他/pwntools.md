@@ -48,8 +48,6 @@ tips：使用ipython可以方便查看各自模块和函数的详细使用用法
 
 
 
-
-
 ## 2.pack&unpack
 
 打包/解包任意长度的整数，默认小端，添加参数`endian`,`signed`可以设置端序和是否带符号 
@@ -152,9 +150,11 @@ io = gdb.debug("/bin/bash", gdbscript='continue')
 
 附加到一个进程，target可以是pid也可以是process
 gdb.attach(target, gdbscript=None)
+gdb.attach(proc.pidof(p)[0])
+pause()
 ```
 
-
+在脚本中调用 gdb 并不是准确停在调用这一行，而是会执行到脚本的 下一（或几）行，举个例子：
 
 ## 7.ELF
 
@@ -190,6 +190,7 @@ ELF文件有几组不同的符号表可用，每组都包含在`{name: data}`的
 ## 8.其他
 
 * `cyclic(len)`：生成指定长度的数据
+* `cyclic -l lookup_value`:执行查找
 * `b *$rebase(0x相对基址偏移)` 是 pwngdb 中的一个调试命令，用于在基地址重定位后设置断点
 * `flat`函数可以将一个列表（或其他可迭代对象）中的元素转换为二进制字符串，并将这些字符串连续拼接起来。这对于在二进制漏洞利用中构造包含多个数据块的payload特别有用
 

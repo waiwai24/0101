@@ -280,7 +280,11 @@ stepi （si）单步一条机器指令。
 * Ctrl + x，再按1：单窗口模式，显示一个窗口
 * Ctrl + x，再按2：双窗口模式，显示两个窗口
 * Ctrl + x，再按a：回到传统模式，即退出layout，回到执行layout之前的调试窗口
+* Ctrl + r，指令反向搜索
 * backtrace：(简写bt)可以查看程序的调用栈。-full 参数可完整打印
+* !shell：执行shell命令
+* search -t {type} value
+* find start_addr,end_addr,value
 
 ### 8.1 pwndbg
 
