@@ -211,7 +211,7 @@ step   单步到下一个不同的源代码行（包括进入函数）。
 stepi （si）单步一条机器指令。
 ```
 
-* reverse-调试方法，可以反向调试
+* reverse-调试方法，可以反向调试（但是要在此之前开启record full）
 
 
 
@@ -244,6 +244,7 @@ stepi （si）单步一条机器指令。
 
 * `arena`：显示arena的详细信息,过于详细
 
+* `p main_arena`:主线程
 * `arenas`：显示所有arena的基本信息
 
 * `arenainfo`：好看的显示所有arena的信息
