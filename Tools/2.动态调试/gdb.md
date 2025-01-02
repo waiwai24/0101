@@ -258,7 +258,7 @@ stepi （si）单步一条机器指令。
 - `tcache`：查看tcache详细信息
 - `heap`：数据结构的形式显示所有堆块，会显示一大堆
 - `heap -v`：查看完整数据结构
-- `parseheap`：显示堆结构，很好用，与heap大同小异
+- `parseheap`，`par`：显示堆结构，很好用，与heap大同小异
 - `mp`：查看堆相关结构体信息
 - `heapbase`：查看堆起始地址
 - `heapinfo、heapinfoall`：显示堆的信息，和bins的挺像的，没bins好用
