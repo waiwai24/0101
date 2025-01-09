@@ -310,4 +310,4 @@ stepi （si）单步一条机器指令。
   24
   ```
 
-  
+* `fmtarg addr`:在进入`printf`函数时断下，调用`fmtarg`后可以自动计算格式化参数与`addr`的偏移
