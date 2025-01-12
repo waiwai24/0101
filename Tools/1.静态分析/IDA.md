@@ -123,4 +123,84 @@ edit:
 
 * `R`：将选中的数字转换为相应的 ASCII 字符
 
-  
+
+
+
+## 6.idapython
+
+| function                                                     | Code                                                         |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| 获取IDA界面地址                                              |                                                              |
+| 取当前地址                                                   | idc.here() 或 idc.get_screen_ea()                            |
+| 获取最小地址（可以使用的）                                   | ida_ida.inf_get_min_ea()                                     |
+| 获取最大地址（可以使用的）                                   | ida_ida.inf_get_max_ea()                                     |
+| 获取所选范围的起始地址                                       | idc.read_selection_start()                                   |
+| 获取所选范围的结束地址                                       | idc.read_selection_end()                                     |
+|                                                              |                                                              |
+| **获取地址的数值**                                           |                                                              |
+| **以1字节为单位获取地址处的值**                              | idc.get_wide_byte(addr)                                      |
+| **以2字节(字)的单位获取**                                    | idc.get_wide_word(addr)                                      |
+| **以4字节的单位获取**                                        | idc.get_wide_dword(addr)                                     |
+| 以8字节的单位获取                                            | idc.get_qword(addr)                                          |
+| 判断是否是字节                                               | ida_bytes.is_byte                                            |
+| **得到运行断点之前的寄存器的值**                             | ea=get_reg_value("eax")                                      |
+|                                                              |                                                              |
+|                                                              |                                                              |
+| **修改指令数值**                                             |                                                              |
+| **修改addr地址的值为value.每次修改1个字节**                  | ida_bytes.patch_byte(addr,value)                             |
+| **每次修改2个字节**                                          | ida_bytes.patch_word(addr,value)                             |
+| **每次修改4个字节**                                          | ida_bytes.patch_Dword(addr,value)                            |
+| 每次修改8个字节                                              | ida_bytes.patch_Qword(addr,value)                            |
+| **修改寄存器的值**                                           | set_reg_value(value, "eip")                                  |
+|                                                              |                                                              |
+| 汇编指令操作                                                 |                                                              |
+| 获取地址处的汇编语句                                         | idc.GetDisasm(addr) 或 idc.generate_disasm_line(addr,flags)  |
+| 获取指定地址位置的操作数.参数1是地址.参数2是操作数索引.如 mov ebp,esp中： 操作数1是ebp ，操作数2是esp mov则是汇编指令不是操作数 | idc.print_operand(addr,index)                                |
+| 获取汇编操作指令（如mov、add）                               | idc.print_insn_mnem(addr)                                    |
+|                                                              |                                                              |
+| 段操作                                                       |                                                              |
+| 获取段的名字（参数为当前的地址）                             | idc.get_segm_name(addr)                                      |
+| 获取段的开始地址                                             | idc.get_segm_start(addr)                                     |
+| 获取段的结束地址                                             | idc.get_segm_end(addr)                                       |
+| 获取第一个段                                                 | idc.get_first_seg(addr)                                      |
+| 获取下一个段                                                 | idc.get_next_seg(addr)                                       |
+| 返回一个列表记录所有段的地址                                 | idautil.Segments()                                           |
+|                                                              |                                                              |
+| 函数操作                                                     |                                                              |
+| 获取指定地址之间的所有函数                                   | idautils.Functions(startaddr,endaddr)                        |
+| 获取指定地址的函数名                                         | idc.get_func_name(addr)                                      |
+| 获取函数的注释                                               | get_func_cmt(addr, repeatable) repeatable:0/1 0是获取常规注释 1是获取重复注释 |
+| 设置函数注释                                                 | idc.set_func_cmt(ea, cmt, repeatable)                        |
+| 弹出框框要求用户进行选择 参数则是信息                        | idc.choose_func(title)                                       |
+| 返回: addr 距离函数的偏移形式                                | idc.get_func_off_str(addr)                                   |
+| 寻找函数结尾,如果函数存在则返回结尾地址,否则返回BADADDR      | idc.find_func_end(addr)                                      |
+| 设置函数结尾                                                 | ida_funcs.set_func_end(ea, newend) newend:新的结束地址       |
+| 设置函数开头                                                 | ida_funcs.set_func_start(addr, newstart)                     |
+| 设置地址处的名字                                             | idc.set_name(ea, name, SN_CHECK) Ex函数也使用set_name        |
+| 获取首个函数                                                 | idc.get_prev_func(ea)                                        |
+| 获取下一个函数                                               | idc.get_next_func(ea)                                        |
+|                                                              |                                                              |
+| 数据查询                                                     |                                                              |
+| 查找二进制找到返回地址没找到返回-1(BADADDR)                  | idc.find_binary(ea, flag, searchstr, radix=16, from_bc695=False) |
+| 从ea开始寻找下一个数据地址                                   | ida_search.find_data(ea, sflag)                              |
+| 从ea开始寻找下一个代码地址                                   | ida_search.find_code(ea, sflag)                              |
+| 光标跳转到ea位置（不是eip！！！）                            | ida_kernwin.jumpto(ea)                                       |
+|                                                              |                                                              |
+| 数据校验                                                     |                                                              |
+| 获取标志                                                     | ida_bytes.get_full_flags(ea)                                 |
+| 判断是否为代码                                               | ida_bytes.is_code(f) f即标志                                 |
+| 判断是否为数据                                               | ida_bytes.is_data(f)                                         |
+|                                                              |                                                              |
+| 交叉引用                                                     |                                                              |
+| 获取地址处引用位置 A调用B 对B函数地址使用此函数则找到A调用 返回列表.遍历列表则可以找出所有引用位置. 参数1是ea也就是地址,参数2告诉IDA是否跟踪这些代码. | idautils.CodeRefsTo(ea, flow)                                |
+| 返回ea的代码引用了何处的代码. 返回一个列表                   | idautils.CodeRefsFrom(ea, flow)                              |
+| 返回一个列表告诉ea位置的数据被谁引用了                       | idautils.DataRefsTo(ea)                                      |
+| 告诉我们ea引用了谁.                                          | idautils.DataRefsFrom(ea)                                    |
+|                                                              |                                                              |
+| **动调脚本化**                                               |                                                              |
+| **在指定的地址设置断点**                                     | AddBpt(long Address)                                         |
+| **获取一个寄存器的名称**                                     | GetRegValue(string Register)                                 |
+| **设置寄存器的值**                                           | SetRegValue(long Value, string Register)                     |
+| **运行到指定的地址，然后停下**                               | RunTo(long Address)                                          |
+| **解决python 脚本和调试器执行流异步执行**（就是说idapython和断点会在汇编执行前执行，这段代码让它在汇编执行后再执行idapython） | idaapi.step_into() GetDebuggerEvent(WFNE_SUSP, -1)           |
+| **获取栈内数据**（这样，运行到某个位置，获取esp/rsp的值，为栈顶，通过偏移可以获取相对应的栈内地址，然后使用`Byte()`/ `Dword()`来获取相关数据） | RunTo(xxx) GetDebuggerEvent(WFNE_SUSP, -1) stack = GetRegValue("esp") |
