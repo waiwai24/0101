@@ -20,7 +20,7 @@ tips：使用ipython可以方便查看各自模块和函数的详细使用用法
 
 * 套接字：`l=listen(1080)`，`r=remote('1270.0.1',1080)`
 
-* SSH ：`session=ssh(host='example.com',user='name',password='passwd')`
+* SSH ：`session=ssh(host='example.com',port=22，user='name',password='passwd')`
 
 * 串口：`pwnlib.tubes.serialtube`
 

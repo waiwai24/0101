@@ -57,7 +57,7 @@ gcc -fstack-protector-all -o test test.c
 
 ## 4.bypass
 
-* 格式化字符串绕过canary(先泄露canary再fu'gai)
+* 格式化字符串绕过canary(先泄露canary再覆盖)
 * canary爆破
 * stack smashing
 * 劫持_stack_chk_fail
