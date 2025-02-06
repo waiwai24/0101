@@ -1,6 +1,6 @@
 # bzero()
 
-```
+```c
  void bzero(void *s, int n);
 ```
 
