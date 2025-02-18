@@ -53,6 +53,7 @@ else:
 # session = ssh(host='node5.buuoj.cn', port=26482, user='CTFMan', password='guest')
 # p = session.process(['./vuln'])
 #-----------------------------------------------------------------------------------------
+it      = lambda                    :p.interactive()
 sd      = lambda data               :p.send((data))
 sa     	= lambda delim,data         :p.sendafter((delim), (data))
 sl      = lambda data               :p.sendline((data))
