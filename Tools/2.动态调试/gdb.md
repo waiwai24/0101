@@ -165,7 +165,9 @@ $19 = {0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x2c, 0x73, 0x68, 0x6f, 0x75, 0x77, 0x61, 0
 	  变量e的四个字节都以二进制的方式打印出来了
     ```
 
-* 查看寄存器的值：info registers
+* info registers：打印普通寄存器	
+
+* info all-registers：打印所有寄存器
 
 * 查看函数：info functions
 
@@ -264,7 +266,22 @@ stepi （si）单步一条机器指令。
 - `heapinfo、heapinfoall`：显示堆的信息，和bins的挺像的，没bins好用
 - `tracemalloc`：好用，会跟提示所有操作堆的地方
 
-## 8.插件及其他
+
+
+## 8.多线程调试
+
+* `info threads`: 查看当前所有的线程
+* `thread n`: 切换到 id 为n的线程中
+* 对于进程也有类似的命令`info inferiors`/`inferior n`
+* `set detach-on-fork on`：设置gdb是否分离fork的子进程，默认on
+* `set follow-fork-mode child`：设置调试器响应到fork或vfork的程序调用,默认跟踪parent进程
+* `catch exec`：捕获对 exec 的调用
+* `catch fork`：捕获对 fork 的调用
+* `catch vfork`：捕获对 vfork 的调用
+* `catch syscall`：捕获系统调用
+* 
+
+## 9.插件及其他
 
 * 代码分屏快捷键：ctrl x + a
 * 查看源码搜索路径：show directories
@@ -287,7 +304,7 @@ stepi （si）单步一条机器指令。
 * search -t {type} value
 * find start_addr,end_addr,value
 
-### 8.1 pwndbg
+### 9.1 pwndbg
 
 * `b *$rebase(偏移)`：PIE开启情况下下断点
 
@@ -311,3 +328,9 @@ stepi （si）单步一条机器指令。
   ```
 
 * `fmtarg addr`:在进入`printf`函数时断下，调用`fmtarg`后可以自动计算格式化参数与`addr`的偏移
+
+* 程序运行时对参数的输入/控制：
+
+  * run后面直接跟参数
+  * `set args`
+  * 标准输入：`run < file`,`$ python -c 'print "A"*100' | ./demo`,`run < <(python -c 'print "A"*100')`
