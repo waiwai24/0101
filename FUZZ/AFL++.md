@@ -6,6 +6,8 @@
 
 ## 1.基本原理
 
+为了让AFL工作，需要使用特殊的AFL编译器编译二进制文件（插桩，记录代码覆盖率）
+
 AFL++编译器的选择：
 
 ```text
@@ -36,8 +38,9 @@ AFL++编译器的选择：
 
 
 
-```
-afl-fuzz [ options ] -- /path/to/fuzzed_app [ ... ]
+```shell
+afl-fuzz -i [input] -o [output] [options] -- /path/to/fuzzed/binary [@@]
+
 -i：输入的测试用例目录
 -o：输出fuzz结果的目录
 -s：
