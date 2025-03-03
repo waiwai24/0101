@@ -284,10 +284,10 @@ stepi （si）单步一条机器指令。
 ## 9.插件及其他
 
 * 代码分屏快捷键：ctrl x + a
-* 查看源码搜索路径：show directories
-* directory path：指定源文件目录(源码调试时)（通常指定glibc源码路径），也可以在开始gdb时使用 gdb -d path 指定源文件路径
 * show debug-file-directory
 * set debug-file-directory directories：指定带调试信息共享库所在目录，也就是对应glibc版本的.debug目录，方法只是该次有效，当重新gdb调试时需要再次设置
+* 查看源码搜索路径：show directories
+* directory path：指定源文件目录(源码调试时)（通常指定glibc源码路径），也可以在开始gdb时使用 gdb -d path 指定源文件路径
 * layout：用于分割窗口，可以一边查看代码，一边测试。主要有以下几种用法：
 * layout src：显示源代码窗口
 * layout asm：显示汇编窗口
@@ -303,6 +303,7 @@ stepi （si）单步一条机器指令。
 * !shell：执行shell命令
 * search -t {type} value
 * find start_addr,end_addr,value
+* source file，运行file里面的脚本
 
 ### 9.1 pwndbg
 
