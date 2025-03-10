@@ -44,7 +44,6 @@ afl-fuzz -i [input] -o [output] [options] -- /path/to/fuzzed/binary [@@]
 -i：输入的测试用例目录
 -o：输出fuzz结果的目录
 -s：
-
 ```
 
 
