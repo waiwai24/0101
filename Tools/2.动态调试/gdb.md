@@ -286,6 +286,8 @@ stepi （si）单步一条机器指令。
 * `catch vfork`：捕获对 vfork 的调用
 * `catch syscall`：捕获系统调用
 
+
+
 ## 9.插件及其他
 
 * 代码分屏快捷键：ctrl x + a
