@@ -135,3 +135,15 @@ other：
 ## 6.结构体
 
 先在 structure 中添加一个空白的结构体，然后在，local type 中用 c 代码写好结构体的定义
+
+
+
+## 7.插件推荐
+
+卡巴斯基分析插件：https://github.com/KasperskyLab/hrtng
+
+llm：https://github.com/WPeace-HcH/WPeChatGPT
+
+patch：https://github.com/keystone-engine/keypatch；https://github.com/gaasedelen/patching
+
+vulfi:https://github.com/Accenture/VulFi

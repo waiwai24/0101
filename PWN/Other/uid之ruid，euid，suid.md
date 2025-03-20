@@ -53,7 +53,7 @@ int setreuid(uid_t ruid,uid_t euid);
 
 ## 3.shellcode
 
-Linux/x86 - setreuid(0) + execve("/bin/sh") Shellcode (29 bytes)：
+Linux/x86 - setreuid(0, 0) + execve("/bin/sh") Shellcode (29 bytes)：
 
 ```c
 $ gcc -fno-stack-protector -z execstack shellcode_tester.c -o shellcode
