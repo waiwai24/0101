@@ -311,6 +311,7 @@ stepi （si）单步一条机器指令。
 * search -t {type} value
 * find start_addr,end_addr,value
 * source file，运行file里面的脚本
+* u：在指定地址附近反汇编
 
 ### 9.1 pwndbg
 
