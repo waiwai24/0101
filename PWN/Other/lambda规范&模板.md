@@ -61,10 +61,13 @@ sl      = lambda data               :p.sendline((data))
 sla     = lambda delim,data         :p.sendlineafter((delim), (data))
 r       = lambda numb=4096          :p.recv(numb)
 ru      = lambda delims, drop=False :p.recvuntil(delims, drop)
+rl      = lambda                    :p.recvline()
 l       = lambda str1               :log.success(str1)
 li      = lambda str1,data1         :log.success(str1+' ========> '+hex(data1))
 uu32    = lambda data               :u32(data.ljust(4, b"\x00"))
 uu64    = lambda data               :u64(data.ljust(8, b"\x00"))
+n32     = lambda x                  :(x + 0x100000000) & 0xFFFFFFFF
+n64     = lambda x                  :(x + 0x10000000000000000) & 0xFFFFFFFFFFFFFFFF
 u32Leakbase = lambda offset         :u32(ru(b"\xf7")[-4:]) - offset
 u64Leakbase = lambda offset         :u64(ru(b"\x7f")[-6:].ljust(8, b"\x00")) - offset
 #-----------------------------------------------------------------------------------------
