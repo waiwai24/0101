@@ -42,7 +42,7 @@ $ docker cp  bcff:/tmp/folder  .
 
 Docker可以通过从`Dockerfile`中阅读指令来**自动构建镜像**，`Dockerfile`是一个文本文件，包含构建容器镜像所需的所有命令
 
-可以修改from后的ubuntu:20.04，换成带镜像的，目前使用的镜像https://docker.xuanyuan.me/
+可以修改from后的ubuntu:20.04，换成带镜像的，目前使用的镜像https://docker.xuanyuan.me/，cdn加速毫秒镜像：https://1ms.run/
 
 ```dockerfile
 FROM ubuntu:20.04
