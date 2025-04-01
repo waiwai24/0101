@@ -8,8 +8,9 @@ char *strcpy(char* dest, const char *src);
 
 * \#include <string.h> 和 #include <stdio.h>
 * 把从src地址开始且**含有NULL结束符**的字符串复制到以dest开始的地址空间
-* 遇到 `\0` 的时候马上结束
+* 遇到 `\0`（ascii码为0）的时候马上结束
 * 返回一个指向最终的目标字符串 dest 的指针
+* 注：dest的空间必须要能够存储src的长度加上NULL字符
 
 
 
