@@ -38,7 +38,7 @@ from LibcSearcher import *
 
 elf_path = './pwn'
 libc_path = './libc.so.6'
-elf = ELF(elf_path)
+elf = ELF(elf_path, checksec=False)
 libc = ELF(libc_path)
 context(arch=elf.arch, os=elf.os, log_level="debug")
 # context.terminal = ['tmux','splitw','-h']
