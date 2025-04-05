@@ -271,6 +271,7 @@ stepi （si）单步一条机器指令。
 - `heapbase`：查看堆起始地址
 - `heapinfo、heapinfoall`：显示堆的信息，和bins的挺像的，没bins好用
 - `tracemalloc`：好用，会跟提示所有操作堆的地方
+- `try_free`：检查堆管理器是否能释放gai
 
 
 
@@ -312,6 +313,7 @@ stepi （si）单步一条机器指令。
 * find start_addr,end_addr,value
 * source file，运行file里面的脚本
 * u：在指定地址附近反汇编
+* hex：查看地址处的数据
 
 ### 9.1 pwndbg
 
