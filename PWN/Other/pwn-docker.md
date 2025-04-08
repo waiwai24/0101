@@ -4,7 +4,7 @@
 
 
 
-创建容器：（）
+创建容器：
 
 ```shell
 docker run -it -d -v host_path:container_path -p host_port:container_port --cap-add=SYS_PTRACE --name=container-name IMAGE_ID /bin/sh
