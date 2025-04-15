@@ -1,0 +1,55 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.7.17 Chrome/128.0.6613.36 Electron/32.0.1 Safari/537.36" version="24.7.17">
+  <diagram name="第 1 页" id="BB6B2R9epGzONNcdU3po">
+    <mxGraphModel dx="2705" dy="2346" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Qs5tFnQ5pcPWy0FM0qQY-24" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-1" y="540" width="440" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="Qs5tFnQ5pcPWy0FM0qQY-23" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-1" y="596" width="440" height="314" as="geometry" />
+        </mxCell>
+        <mxCell id="Qs5tFnQ5pcPWy0FM0qQY-22" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="180" width="380" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Qs5tFnQ5pcPWy0FM0qQY-21" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="-50" width="380" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="Qs5tFnQ5pcPWy0FM0qQY-18" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="Qs5tFnQ5pcPWy0FM0qQY-2" target="Qs5tFnQ5pcPWy0FM0qQY-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Qs5tFnQ5pcPWy0FM0qQY-19" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="Qs5tFnQ5pcPWy0FM0qQY-2" target="Qs5tFnQ5pcPWy0FM0qQY-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Qs5tFnQ5pcPWy0FM0qQY-2" value="&lt;b&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;largebin attack&lt;/font&gt;&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="159" y="360" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Qs5tFnQ5pcPWy0FM0qQY-6" value="&lt;span style=&quot;text-wrap: nowrap;&quot;&gt;glibc-2.30以前&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="159" y="240" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Qs5tFnQ5pcPWy0FM0qQY-7" value="&lt;span style=&quot;text-wrap: nowrap;&quot;&gt;glibc-2.30及以后&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="159" y="480" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Qs5tFnQ5pcPWy0FM0qQY-8" value="&lt;font style=&quot;font-size: 10px;&quot;&gt;大小超过0x400&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="174" y="400" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Qs5tFnQ5pcPWy0FM0qQY-11" value="劫持bk和bk_nextsize,然后再释放一个较大的chunk进入该largebin&lt;div&gt;（进行插入操作时会先遍历找位置再插入），&lt;div&gt;即可在2个目标地址写入该释放chunk的地址，即一个较大的值&lt;/div&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="34" y="180" width="370" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Qs5tFnQ5pcPWy0FM0qQY-12" value="主要是利用如果插入的chunk小于 largebin中的 chunk （即最小的 chunk）时&lt;span style=&quot;background-color: initial;&quot;&gt;没有&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;对&lt;/span&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;双向链表进行任何检查，&lt;/span&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;此时只需要把largebin中最小chunk的bk_nextsize指针&lt;/span&gt;&lt;div&gt;&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;指向targetaddr-0x20即可向target处写入一个新地址&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-6" y="540" width="450" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Qs5tFnQ5pcPWy0FM0qQY-13" value="利用的主要源码部分：&lt;div&gt;&lt;div&gt;else&lt;/div&gt;&lt;div&gt;{&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; victim-&amp;gt;fd_nextsize = fwd;&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; victim-&amp;gt;bk_nextsize = fwd-&amp;gt;bk_nextsize;&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; fwd-&amp;gt;bk_nextsize = victim;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&amp;nbsp; &amp;nbsp; victim-&amp;gt;bk_nextsize-&amp;gt;fd_nextsize = victim;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;}&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;bck = fwd-&amp;gt;bk;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;victim-&amp;gt;bk = bck;&lt;/div&gt;&lt;div&gt;victim-&amp;gt;fd = fwd;&lt;/div&gt;&lt;div&gt;fwd-&amp;gt;bk = victim;&lt;/div&gt;&lt;div&gt;&lt;b&gt;bck-&amp;gt;fd = victim;&lt;/b&gt;&lt;/div&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="70" y="-50" width="280" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="Qs5tFnQ5pcPWy0FM0qQY-14" value="&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;对以前的利用点添加了两项检查：&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;fwd-&amp;gt;bk_nextsize-&amp;gt;fd_nextsize != fwd&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;bck-&amp;gt;fd != fwd&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="279" y="480" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Qs5tFnQ5pcPWy0FM0qQY-15" value="利用的主要源码部分：&lt;div&gt;&lt;div&gt;bck = bin_at (av, victim_index);&lt;/div&gt;&lt;div&gt;fwd = bck-&amp;gt;fd;&lt;/div&gt;&lt;div&gt;if (fwd != bck)&lt;/div&gt;&lt;div&gt;{&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space-collapse: collapse;&quot;&gt;&lt;span style=&quot;white-space-collapse: preserve;&quot;&gt;&#x9;&lt;/span&gt;...&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; if ((unsigned long) (size) &amp;lt; (unsigned long) chunksize_nomask (bck-&amp;gt;bk))&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; {&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; fwd = bck;&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; bck = bck-&amp;gt;bk;&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; victim-&amp;gt;fd_nextsize = fwd-&amp;gt;fd;&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; victim-&amp;gt;bk_nextsize = fwd-&amp;gt;fd-&amp;gt;bk_nextsize;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; fwd-&amp;gt;fd-&amp;gt;bk_nextsize = victim-&amp;gt;bk_nextsize-&amp;gt;fd_nextsize = victim;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space-collapse: collapse;&quot;&gt;&lt;span style=&quot;white-space-collapse: preserve;&quot;&gt;&#x9;&lt;/span&gt;}&lt;/span&gt;&lt;/div&gt;&lt;div&gt;...&lt;/div&gt;&lt;div&gt;}&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;victim-&amp;gt;bk = bck;&lt;/div&gt;&lt;div&gt;victim-&amp;gt;fd = fwd;&lt;/div&gt;&lt;div&gt;fwd-&amp;gt;bk = victim;&lt;/div&gt;&lt;div&gt;bck-&amp;gt;fd = victim;&lt;/div&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="20" y="593" width="430" height="320" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

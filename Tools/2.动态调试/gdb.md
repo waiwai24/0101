@@ -314,6 +314,7 @@ stepi （si）单步一条机器指令。
 * source file，运行file里面的脚本
 * u：在指定地址附近反汇编
 * hex：查看地址处的数据
+* leakfind addr --page_name=heap --max_offset=0x3000 --max_depth=3：尝试根据起始地址查找泄漏链，默认在栈中扫描，offset指定范围，depth指定深度
 
 ### 9.1 pwndbg
 
