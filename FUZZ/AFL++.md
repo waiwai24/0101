@@ -6,7 +6,7 @@
 
 ## 1.基本原理
 
-为了让AFL工作，需要使用特殊的AFL编译器编译二进制文件（插桩，记录代码覆盖率）
+为了让 AFL 工作，需要使用特殊的 AFL 编译器编译二进制文件（插桩，记录代码覆盖率）
 
 AFL++编译器的选择：
 
@@ -52,11 +52,11 @@ afl-fuzz -i [input] -o [output] [options] -- /path/to/fuzzed/binary [@@]
 
 https://github.com/AFLplusplus/AFLplusplus
 
-推荐本地编译，不推荐docker容器（性能受损）
+推荐本地编译，不推荐 docker 容器（性能受损）
 
 
 
-## 3.深度fuzz
+## 3.fuzz
 
 指的是在有源码的情况下
 
@@ -66,3 +66,23 @@ https://github.com/AFLplusplus/AFLplusplus
 - 通过选择和优化目标的输入语料库来准备模糊测试
 - 通过随机改变输入并评估该输入是否在目标二进制中的新路径上进行处理来执行目标的模糊测试
 
+
+
+程序编译：
+
+* 单个代码文件，可以直接使用 afl-gcc 进行编译，并使用-g 选项带上调试信息
+* autoconf构建：
+  * 设置CC
+
+对于fuzzing共享库时，通常使用静态编译（`--disable-shared`）
+
+
+
+种子修剪：
+
+* afl-cmin：尝试找到与语料库全集具有相同覆盖范围的最小子集，移除执行相同代码的输入文件
+* afl-tmin：减少单个输入文件的大小
+
+
+
+fuzz：@@用于替换输入文件

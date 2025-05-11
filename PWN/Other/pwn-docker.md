@@ -25,3 +25,4 @@ tmux set mouse on
 在tmux中，ctrl+c 和ctrl+v无法进行复制粘贴。
 
 按住shift可以恢复鼠标右键快捷模式
+
