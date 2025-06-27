@@ -16,7 +16,7 @@ The Web management interface of the Blink router `/cgi-bin/lighttpd.cgi` directl
 
 When handling `geteasycfg` requests, the `bs_GetEasyInfo` function in `libblinkapi.so` is called for business logic processing. This function has a security flaw: it directly reads the administrator password (Routepwd) from the UCI configuration without encryption or desensitization processing, and directly writes the plaintext password into the JSON response and returns it.
 
-![image-20250628010240152](.img/Plaintext Password Leakage in the Web Management Interface of BL-AC3600 Routers.assets/image-20250628010240152.png)
+![image-20250628010240152](.img/Plaintext_Password_Leakage_in_the_Web_Management_Interface_of_BL-AC3600_Routers.assets/image-20250628010240152.png)
 
 ## POC
 
