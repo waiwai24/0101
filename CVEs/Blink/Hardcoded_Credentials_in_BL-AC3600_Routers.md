@@ -18,7 +18,7 @@
 
 Contents of /etc/shadow：
 
-![image-20250627233758217](.img/Hardcoded Credentials in BL-AC3600 Routers.assets/image-20250627233758217.png)
+![image-20250627233758217](.img/Hardcoded_Credentials_in_BL-AC3600_Routers.assets/image-20250627233758217.png)
 
 Cracked passwords:
 
@@ -28,4 +28,4 @@ root:blinkadmin
 
 Verification:
 
-![image-20250627234223238](.img/Hardcoded Credentials in BL-AC3600 Routers.assets/image-20250627234223238.png)
+![image-20250627234223238](.img/Hardcoded_Credentials_in_BL-AC3600_Routers.assets/image-20250627234223238.png)

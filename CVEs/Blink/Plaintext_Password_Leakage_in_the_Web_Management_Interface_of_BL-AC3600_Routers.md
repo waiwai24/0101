@@ -60,7 +60,7 @@ First request:
 
 return default password
 
-![passwd1](.img/Plaintext Password Leakage in the Web Management Interface of BL-AC3600 Routers.assets/passwd1.png)
+![passwd1](.img/Plaintext_Password_Leakage_in_the_Web_Management_Interface_of_BL-AC3600_Routers.assets/passwd1.png)
 
 To verify that the vulnerability holds true, log in to the webui to modify the password and make a new request. The returned password value is the modified one.
 
@@ -68,4 +68,4 @@ Second request：
 
 return modified password admin@123
 
-![image-20250628012129383](.img/Plaintext Password Leakage in the Web Management Interface of BL-AC3600 Routers.assets/image-20250628012129383.png)
+![image-20250628012129383](.img/Plaintext_Password_Leakage_in_the_Web_Management_Interface_of_BL-AC3600_Routers.assets/image-20250628012129383.png)
