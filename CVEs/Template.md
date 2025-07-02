@@ -1,14 +1,14 @@
 # Title
 
-**BUG_Author: **waiwai
+BUG_Author: waiwai
 
-**Affected Version: ** 
+Affected Version:  
 
-**Vendor：**
+Vendor：
 
-**Product: ** 
+Product:  
 
-**Vulnerability Files: **
+Vulnerability Files: 
 
 ## Description
 
