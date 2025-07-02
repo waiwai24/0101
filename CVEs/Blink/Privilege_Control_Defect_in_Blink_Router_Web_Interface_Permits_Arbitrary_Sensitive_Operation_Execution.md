@@ -1,4 +1,4 @@
-# Authentication Bypass Vulnerability for Sensitive Operations in Multiple Blink Router Models
+# Privilege Control Defect in Blink Router Web Interface Permits Arbitrary Sensitive Operation Execution
 
 BUG_Author: waiwai
 
@@ -10,7 +10,7 @@ Vulnerability Files: libblinkapi.so
 
 ## Description
 
-A critical authentication bypass vulnerability exists in the router's web management interface. This flaw allows attackers to perform sensitive operations such as remote restart or factory reset through simple HTTP requests without proper authentication verification, leading to network service disruption and configuration data loss.
+The Blink router's Web management interface contains a serious vulnerability of **unverified identity permissions for sensitive operations**. This vulnerability is not about bypassing existing authentication mechanisms, but rather the failure to verify the requester's identity and permissions when handling specific sensitive operations. Attackers can execute sensitive operations such as restart and factory reset through simple HTTP requests, leading to network service interruption and configuration data loss.
 
 **Vulnerable API Endpoints**
 
