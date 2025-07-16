@@ -38,5 +38,5 @@ Included authchallenge：
 
 Not included authchallenge：The prerequisites have been verified
 
-![屏幕截图 2025-07-16 101134](.img/Remote_Code_Execution_in_Vaelsys_V4_Platform.assets/屏幕截图 2025-07-16 101134.png)
+![屏幕截图 2025-07-16 101134](.img/Remote_Code_Execution_in_Vaelsys_V4_Platform.assets/1111111111.png)
 

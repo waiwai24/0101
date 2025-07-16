@@ -20,4 +20,4 @@ xAJAX parameter description: xajaxargs[]=1: The first user (usually the admin us
 
 ![image-20250716162508572](.img/Unauthorized_Access_Leads_to_Sensitive_Information_Leakage_in_Vaelsys_V4_Platform.assets/image-20250716162508572.png)
 
-![屏幕截图 2025-07-16 150451](.img/Unauthorized_Access_Leads_to_Sensitive_Information_Leakage_in_Vaelsys_V4_Platform.assets/屏幕截图 2025-07-16 150451.png)
+![屏幕截图 2025-07-16 150451](.img/Unauthorized_Access_Leads_to_Sensitive_Information_Leakage_in_Vaelsys_V4_Platform.assets/1111111111.png)
