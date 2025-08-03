@@ -1,0 +1,233 @@
+{
+  "main": {
+    "id": "ac37d116aa3cc7da",
+    "type": "split",
+    "children": [
+      {
+        "id": "430ec9055f76a863",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "9a6696cc340d0762",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "PWN/堆利用/1.堆基础.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "1.堆基础"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "fb4582eaf733cdf2",
+    "type": "split",
+    "children": [
+      {
+        "id": "5f7c09a83e4f197e",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "0062e509deab57de",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "c5f37513be693d1f",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "e1cb8cb0e35dd15a",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 439.5
+  },
+  "right": {
+    "id": "5ab8a024e2c7de36",
+    "type": "split",
+    "children": [
+      {
+        "id": "e52a1d6e75a7e837",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "0216166afb308d7a",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "反向链接"
+            }
+          },
+          {
+            "id": "17b7be55147ac281",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "PWN/堆利用/3.核心函数.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "3.核心函数 的出链列表"
+            }
+          },
+          {
+            "id": "e4af8721151e1d83",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "9e11b82f6e4cf55c",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "PWN/堆利用/3.核心函数.md",
+                "followCursor": true,
+                "showSearch": true,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "3.核心函数 的大纲"
+            }
+          },
+          {
+            "id": "87449b37db0e9cb1",
+            "type": "leaf",
+            "state": {
+              "type": "calendar",
+              "state": {},
+              "icon": "calendar-with-checkmark",
+              "title": "Calendar"
+            }
+          }
+        ],
+        "currentTab": 4
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "workspaces:管理工作区布局": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false,
+      "publish:发布更改": false,
+      "obsidian-local-images-plus:Local Images Plus  0.16.3\r\nLocalize attachments (plugin folder)": false,
+      "oz-clear-unused-images:Clear Unused Images": false
+    }
+  },
+  "active": "9a6696cc340d0762",
+  "lastOpenFiles": [
+    "PWN/堆利用/3.核心函数.md",
+    "PWN/堆利用/assets/3.核心函数/file-20250803230432364.png",
+    "conver.py",
+    "PWN/堆利用/2.堆相关数据结构.md",
+    "PWN/堆利用/1.堆基础.md",
+    "PWN/堆利用/assets/2.堆相关数据结构/image-20240911150637545.png",
+    "PWN/堆利用/assets/2.堆相关数据结构/image-20240911150608869.png",
+    "PWN/堆利用/assets/2.堆相关数据结构/image-20240911104151556.png",
+    "PWN/堆利用/assets/2.堆相关数据结构/image-20240911102916169.png",
+    "PWN/堆利用/assets/2.堆相关数据结构/image-20240910235430555.png",
+    "PWN/堆利用/assets/2.堆相关数据结构/v2-c455d778c82cb17229b90b9219174104_1440w.webp",
+    "PWN/Other/assets/system奇技淫巧/image-20250402111239179.png",
+    "PWN/堆利用/assets/3.核心函数/image-20241129165312908.png",
+    "Re/assets/2.逆向基本/image-20241011084237806.png",
+    "2025-08-21.md",
+    "CSNote/操作系统/虚拟化/assets/7.使页表变小",
+    "CSNote/操作系统/虚拟化/assets/6.分页、TLB",
+    "CSNote/操作系统/虚拟化/assets/8.超越物理内存",
+    "CSNote/操作系统/虚拟化/assets/5.分段、空闲空间管理",
+    "CSNote/操作系统/虚拟化/assets/2.受限直接执行",
+    "CSNote/操作系统/虚拟化/assets/1.进程",
+    "CSNote/操作系统/虚拟化/assets",
+    "CVEs/Vul/NAS/assets/QNAP-CVE-2024-53691",
+    "CVEs/Vul/NAS/assets/QNAP-CVE-2024-27130",
+    "README.md",
+    "2025-08-03.md",
+    "CSNote/Cpp/1.基础/12.对于常见数字类型的操作.md",
+    "CSNote/Executable/6.SectionHeaderTable.md",
+    "IOT/Citrix/Basic/1.Citrix基础.md",
+    "CSNote/Executable/9.PE文件.md",
+    "CSNote/Executable/7.编译，链接，装载，执行.md",
+    "CSNote/Executable/8.共享库.md",
+    "CSNote/Executable/6.Section Header Table.md",
+    "CSNote/Executable/5.Sections.md",
+    "CSNote/Executable/4.ProgramHeaderTable.md",
+    "CSNote/Executable/3.ELF_Header.md",
+    "CSNote/Executable/2.ELF文件概述.md",
+    "CSNote/Executable/1.可执行文件.md",
+    "Executable/4.ProgramHeaderTable.md",
+    "PWN/堆利用/BinAttack/9.tcache_dup.md",
+    "PWN/堆利用/BinAttack/8.tcache_poisoning.md",
+    "PWN/堆利用/BinAttack/6.largebin_attack2.md",
+    "PWN/堆利用/BinAttack/5.largebin_attack.md",
+    "PWN/堆利用/BinAttack/4.fastbin_double_free.md",
+    "PWN/堆利用/BinAttack/3.fastbin_attack.md",
+    "未命名.canvas"
+  ]
+}

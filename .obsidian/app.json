@@ -1,0 +1,7 @@
+{
+  "alwaysUpdateLinks": true,
+  "showUnsupportedFiles": true,
+  "newLinkFormat": "relative",
+  "newFileLocation": "current",
+  "useMarkdownLinks": true
+}
