@@ -1,14 +1,14 @@
 # Hardcoded Credentials in BL-AC3600 Routers
 
-**BUG_Author: **waiwai
+BUG_Author: waiwai
 
-**Vendor：**[Blink](https://www.b-link.net.cn/)
+Vendor：[Blink](https://www.b-link.net.cn/)
 
-**Product: **[BL-AC3600](https://www.b-link.net.cn/product_29_177.html)
+Product: [BL-AC3600](https://www.b-link.net.cn/product_29_177.html)
 
-**Affected Version: **V1.0.22 and earlier 
+Affected Version: V1.0.22 and earlier 
 
-**Vulnerability Files: **`/etc/shadow`
+Vulnerability Files: `/etc/shadow`
 
 ## Description
 
