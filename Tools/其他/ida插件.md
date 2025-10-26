@@ -13,3 +13,4 @@
 * mcp：https://github.com/mrexodia/ida-pro-mcp
 * gdb：https://github.com/mahaloz/decomp2dbg
 * 会话同步：https://github.com/calladoum-elastic/ret-sync
+* 查找加密常量：https://github.com/polymorf/findcrypt-yara

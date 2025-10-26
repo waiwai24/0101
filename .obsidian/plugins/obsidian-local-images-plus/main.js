@@ -3818,80 +3818,72 @@ function validateEntityName(name){
 var DocTypeReader = readDocType$1;
 
 const hexRegex = /^[-+]?0x[a-fA-F0-9]+$/;
-const numRegex = /^([\-\+])?(0*)(\.[0-9]+([eE]\-?[0-9]+)?|[0-9]+(\.[0-9]+([eE]\-?[0-9]+)?)?)$/;
-// const octRegex = /0x[a-z0-9]+/;
+const numRegex = /^([\-\+])?(0*)([0-9]*(\.[0-9]*)?)$/;
+// const octRegex = /^0x[a-z0-9]+/;
 // const binRegex = /0x[a-z0-9]+/;
 
-
-//polyfill
-if (!Number.parseInt && window.parseInt) {
-    Number.parseInt = window.parseInt;
-}
-if (!Number.parseFloat && window.parseFloat) {
-    Number.parseFloat = window.parseFloat;
-}
-
-  
+ 
 const consider = {
     hex :  true,
+    // oct: false,
     leadingZeros: true,
     decimalPoint: "\.",
-    eNotation: true
+    eNotation: true,
     //skipLike: /regex/
 };
 
 function toNumber$1(str, options = {}){
-    // const options = Object.assign({}, consider);
-    // if(opt.leadingZeros === false){
-    //     options.leadingZeros = false;
-    // }else if(opt.hex === false){
-    //     options.hex = false;
-    // }
-
     options = Object.assign({}, consider, options );
     if(!str || typeof str !== "string" ) return str;
     
     let trimmedStr  = str.trim();
-    // if(trimmedStr === "0.0") return 0;
-    // else if(trimmedStr === "+0.0") return 0;
-    // else if(trimmedStr === "-0.0") return -0;
-
+    
     if(options.skipLike !== undefined && options.skipLike.test(trimmedStr)) return str;
+    else if(str==="0") return 0;
     else if (options.hex && hexRegex.test(trimmedStr)) {
-        return Number.parseInt(trimmedStr, 16);
-    // } else if (options.parseOct && octRegex.test(str)) {
+        return parse_int(trimmedStr, 16);
+    // }else if (options.oct && octRegex.test(str)) {
     //     return Number.parseInt(val, 8);
+    }else if (trimmedStr.search(/[eE]/)!== -1) { //eNotation
+        const notation = trimmedStr.match(/^([-\+])?(0*)([0-9]*(\.[0-9]*)?[eE][-\+]?[0-9]+)$/); 
+        // +00.123 => [ , '+', '00', '.123', ..
+        if(notation){
+            // console.log(notation)
+            if(options.leadingZeros){ //accept with leading zeros
+                trimmedStr = (notation[1] || "") + notation[3];
+            }else {
+                if(notation[2] === "0" && notation[3][0]=== ".");else {
+                    return str;
+                }
+            }
+            return options.eNotation ? Number(trimmedStr) : str;
+        }else {
+            return str;
+        }
     // }else if (options.parseBin && binRegex.test(str)) {
     //     return Number.parseInt(val, 2);
     }else {
         //separate negative sign, leading zeros, and rest number
         const match = numRegex.exec(trimmedStr);
+        // +00.123 => [ , '+', '00', '.123', ..
         if(match){
             const sign = match[1];
             const leadingZeros = match[2];
             let numTrimmedByZeros = trimZeros(match[3]); //complete num without leading zeros
             //trim ending zeros for floating number
             
-            const eNotation = match[4] || match[6];
             if(!options.leadingZeros && leadingZeros.length > 0 && sign && trimmedStr[2] !== ".") return str; //-0123
             else if(!options.leadingZeros && leadingZeros.length > 0 && !sign && trimmedStr[1] !== ".") return str; //0123
+            else if(options.leadingZeros && leadingZeros===str) return 0; //00
+            
             else {//no leading zeros or leading zeros are allowed
                 const num = Number(trimmedStr);
                 const numStr = "" + num;
+
                 if(numStr.search(/[eE]/) !== -1){ //given number is long and parsed to eNotation
                     if(options.eNotation) return num;
                     else return str;
-                }else if(eNotation){ //given number has enotation
-                    if(options.eNotation) return num;
-                    else return str;
                 }else if(trimmedStr.indexOf(".") !== -1){ //floating number
-                    // const decimalPart = match[5].substr(1);
-                    // const intPart = trimmedStr.substr(0,trimmedStr.indexOf("."));
-
-                    
-                    // const p = numStr.indexOf(".");
-                    // const givenIntPart = numStr.substr(0,p);
-                    // const givenDecPart = numStr.substr(p+1);
                     if(numStr === "0" && (numTrimmedByZeros === "") ) return num; //0.0
                     else if(numStr === numTrimmedByZeros) return num; //0.456. 0.79000
                     else if( sign && numStr === "-"+numTrimmedByZeros) return num;
@@ -3899,26 +3891,11 @@ function toNumber$1(str, options = {}){
                 }
                 
                 if(leadingZeros){
-                    // if(numTrimmedByZeros === numStr){
-                    //     if(options.leadingZeros) return num;
-                    //     else return str;
-                    // }else return str;
-                    if(numTrimmedByZeros === numStr) return num;
-                    else if(sign+numTrimmedByZeros === numStr) return num;
-                    else return str;
+                    return (numTrimmedByZeros === numStr) || (sign+numTrimmedByZeros === numStr) ? num : str
+                }else  {
+                    return (trimmedStr === numStr) || (trimmedStr === sign+numStr) ? num : str
                 }
-
-                if(trimmedStr === numStr) return num;
-                else if(trimmedStr === sign+numStr) return num;
-                // else{
-                //     //number with +/- sign
-                //     trimmedStr.test(/[-+][0-9]);
-
-                // }
-                return str;
             }
-            // else if(!eNotation && trimmedStr && trimmedStr !== Number(trimmedStr) ) return str;
-            
         }else { //non-numeric string
             return str;
         }
@@ -3940,6 +3917,15 @@ function trimZeros(numStr){
     }
     return numStr;
 }
+
+function parse_int(numStr, base){
+    //polyfill
+    if(parseInt) return parseInt(numStr, base);
+    else if(Number.parseInt) return Number.parseInt(numStr, base);
+    else if(window && window.parseInt) return window.parseInt(numStr, base);
+    else throw new Error("parseInt, Number.parseInt, window.parseInt are not supported")
+}
+
 var strnum = toNumber$1;
 
 function getIgnoreAttributesFn$2(ignoreAttributes) {
@@ -4390,7 +4376,7 @@ const replaceEntitiesValue$1 = function(val){
 };
 function saveTextToParentTag(textData, currentNode, jPath, isLeafNode) {
   if (textData) { //store previously collected data as textNode
-    if(isLeafNode === undefined) isLeafNode = Object.keys(currentNode.child).length === 0;
+    if(isLeafNode === undefined) isLeafNode = currentNode.child.length === 0;
     
     textData = this.parseTextData(textData,
       currentNode.tagname,
@@ -4966,6 +4952,8 @@ Builder.prototype.j2x = function(jObj, level, ajPath) {
     } else if (jObj[key] === null) {
       // null attribute should be ignored by the attribute list, but should not cause the tag closing
       if (this.isAttribute(key)) {
+        val += '';
+      } else if (key === this.options.cdataPropName) {
         val += '';
       } else if (key[0] === '?') {
         val += this.indentate(level) + '<' + key + '?' + this.tagEndChar;
@@ -6374,7 +6362,7 @@ md5$1.exports;
 var md5Exports = md5$1.exports;
 var md5 = /*@__PURE__*/getDefaultExportFromCjs(md5Exports);
 
-const APP_TITLE = "Local Images Plus  0.16.3";
+const APP_TITLE = "Local Images Plus  0.16.4";
 //Option to enable debugging
 let VERBOSE = false;
 function setDebug(value = false) {
@@ -6423,7 +6411,10 @@ const DEFAULT_SETTINGS = {
     PngToJpegLocal: true,
     JpegQuality: 80,
     DoNotCreateObsFolder: false,
-    DateFormat: "YYYY MM DD"
+    DateFormat: "YYYY MM DD",
+    ImgCompressionType: "image/jpeg",
+    ExcludedFoldersList: "",
+    ExcludedFoldersListRegexp: ""
 };
 
 const fs2 = require('fs').promises;
@@ -6666,15 +6657,12 @@ function encObsURI(e) {
     }));
 }
 /**
- * https://github.com/mnaoumov/obsidian-dev-utils
- *
- * Converts a Blob object to a JPEG ArrayBuffer with the specified quality.
- *
+ * https://github.com/mnaoumov/obsidian-dev-utils (modified)
  * @param blob - The Blob object to convert.
- * @param jpegQuality - The quality of the JPEG image (0 to 1).
+ * @param imgQuality - The quality of the image (0 to 1).
  * @returns A promise that resolves to an ArrayBuffer.
  */
-function blobToJpegArrayBuffer(blob, jpegQuality) {
+function blobToJpegArrayBuffer(blob, imgQuality, imgType = "image/jpeg") {
     return __awaiter(this, void 0, void 0, function* () {
         return new Promise((resolve) => {
             const reader = new FileReader();
@@ -6697,7 +6685,7 @@ function blobToJpegArrayBuffer(blob, jpegQuality) {
                     context.translate(imageWidth / 2, imageHeight / 2);
                     context.drawImage(image, 0, 0, imageWidth, imageHeight, -imageWidth / 2, -imageHeight / 2, imageWidth, imageHeight);
                     context.restore();
-                    data = canvas.toDataURL('image/jpeg', jpegQuality);
+                    data = canvas.toDataURL(imgType, imgQuality);
                     const arrayBuffer = base64ToBuff(data);
                     resolve(arrayBuffer);
                 };
@@ -14117,8 +14105,8 @@ class SettingTab extends obsidian.PluginSettingTab {
             yield this.plugin.saveSettings();
         })));
         new obsidian.Setting(containerEl)
-            .setName("Convert PNG to JPEG (Web Images)")
-            .setDesc("Convert all downloaded PNG files to JPEG. May reduce file size by several times, but can also affect performance.")
+            .setName("Compress images (Web Images)")
+            .setDesc("Compress all downloaded images. May reduce file size by several times, but can also affect performance.")
             .addToggle((toggle) => toggle
             .setValue(this.plugin.settings.PngToJpeg)
             .onChange((value) => __awaiter(this, void 0, void 0, function* () {
@@ -14126,8 +14114,8 @@ class SettingTab extends obsidian.PluginSettingTab {
             yield this.plugin.saveSettings();
         })));
         new obsidian.Setting(containerEl)
-            .setName("Convert PNG to JPEG (Pasted Images)")
-            .setDesc("Convert all pasted PNG files to JPEG. May reduce file size by several times, but can also affect performance.")
+            .setName("Compress images (Pasted Images)")
+            .setDesc("Compress all pasted images. May reduce file size by several times, but can also affect performance.")
             .addToggle((toggle) => toggle
             .setValue(this.plugin.settings.PngToJpegLocal)
             .onChange((value) => __awaiter(this, void 0, void 0, function* () {
@@ -14135,8 +14123,43 @@ class SettingTab extends obsidian.PluginSettingTab {
             yield this.plugin.saveSettings();
         })));
         new obsidian.Setting(containerEl)
-            .setName("Jpeg Quality")
-            .setDesc("Jpeg quality selection (30 to 100).")
+            .setName("Compression type")
+            .setDesc("Select image compression type. Keep in mind that webp format has image size limitations.")
+            .addDropdown(dropdown => {
+            dropdown
+                .addOption("image/webp", "WebP")
+                .addOption("image/jpeg", "JPEG")
+                .setValue(this.plugin.settings.ImgCompressionType)
+                .onChange((value) => __awaiter(this, void 0, void 0, function* () {
+                this.plugin.settings.ImgCompressionType = value;
+                yield this.plugin.saveSettings();
+            }));
+        });
+        new obsidian.Setting(containerEl)
+            .setName("Excluded folders")
+            .setDesc("Excluded folders. New files in these folders will not be processed automatically.")
+            .addTextArea(text => {
+            text
+                .setPlaceholder("Enter the full path in new lines, e.g. RootFolder/Subfolder.")
+                .setValue(this.plugin.settings.ExcludedFoldersList)
+                .onChange((value) => __awaiter(this, void 0, void 0, function* () {
+                let FoldersArray = value.split(/\r?\n|\r|\n/g);
+                if (FoldersArray.length >= 1) {
+                    let regexconverted = trimAny(FoldersArray.map((path) => { if (trimAny(path, [" ", "|", "/", "\\"]) !== "") {
+                        return "(^" + trimAny(path, [" ", "|", "/", "\\"]) + "$)";
+                    } }).join("|").replace('\\', '/'), [" ", "|", "/", "\\"]);
+                    this.plugin.settings.ExcludedFoldersList = value;
+                    this.plugin.settings.ExcludedFoldersListRegexp = regexconverted;
+                    yield this.plugin.saveSettings();
+                    console.log("Excluded folders regex:", regexconverted);
+                }
+            }));
+            text.inputEl.rows = 4;
+            text.inputEl.style.width = "100%";
+        });
+        new obsidian.Setting(containerEl)
+            .setName("Image Quality")
+            .setDesc("Image quality selection (30 to 100).")
             .addText((text) => text
             .setValue(String(this.plugin.settings.JpegQuality))
             .onChange((value) => __awaiter(this, void 0, void 0, function* () {
@@ -20383,8 +20406,12 @@ function imageTagProcessor(app, noteFile, settings, defaultdir) {
                             const parsedUrl = new url.URL(link);
                             let fileExt = yield getFileExt(fileData, parsedUrl.pathname);
                             if (fileExt == "png" && settings.PngToJpeg) {
+                                let compType = "image/jpeg";
+                                if (settings.ImgCompressionType == "image/webp") {
+                                    compType = "image/webp";
+                                }
                                 const blob = new Blob([new Uint8Array(fileData)]);
-                                fileData = yield blobToJpegArrayBuffer(blob, settings.JpegQuality * 0.01);
+                                fileData = yield blobToJpegArrayBuffer(blob, settings.JpegQuality * 0.01, compType);
                                 logError("arbuf: ");
                                 logError(fileData);
                             }
@@ -20917,17 +20944,23 @@ class LocalImagesPlugin extends obsidian.Plugin {
                                 logError("oldbindata: " + oldBinData);
                                 logError("oldext: " + fileExt);
                                 if (this.settings.PngToJpegLocal && fileExt == "png") {
-                                    logError("converting to Jpeg");
+                                    let compType = "image/jpg";
+                                    let compExt = ".jpg";
+                                    if (this.settings.ImgCompressionType == "image/webp") {
+                                        compType = "image/webp";
+                                        compExt = ".webp";
+                                    }
+                                    logError("Compressing image to ");
                                     const blob = new Blob([new Uint8Array(yield this.app.vault.adapter.readBinary(oldpath))]);
-                                    newBinData = yield blobToJpegArrayBuffer(blob, this.settings.JpegQuality * 0.01);
+                                    newBinData = yield blobToJpegArrayBuffer(blob, this.settings.JpegQuality * 0.01, compType);
                                     newMD5 = md5Sig(newBinData);
                                     logError(newBinData);
                                     if (newBinData != null) {
                                         if (this.settings.useMD5ForNewAtt) {
-                                            newpath = pathJoin([mdir, newMD5 + ".jpeg"]);
+                                            newpath = pathJoin([mdir, newMD5 + compExt]);
                                         }
                                         else {
-                                            newpath = pathJoin([mdir, cFileName(((_f = path__default["default"].parse(el.link)) === null || _f === void 0 ? void 0 : _f.name) + ".jpeg")]);
+                                            newpath = pathJoin([mdir, cFileName(((_f = path__default["default"].parse(el.link)) === null || _f === void 0 ? void 0 : _f.name) + compExt)]);
                                         }
                                         newlink = yield getRDir(note, this.settings, newpath);
                                     }
@@ -21101,8 +21134,9 @@ class LocalImagesPlugin extends obsidian.Plugin {
             }
             // Some file has been created
             this.app.vault.on('create', (file) => __awaiter(this, void 0, void 0, function* () {
+                var _a;
                 logError("New file created: " + file.path);
-                if (this.ExemplaryOfMD(file.path)) {
+                if (this.ExemplaryOfMD(file.path) && !this.ThePathExcluded(String((_a = file.parent) === null || _a === void 0 ? void 0 : _a.path))) {
                     this.onMdCreateFunc(file);
                 }
                 else {
@@ -21140,10 +21174,11 @@ class LocalImagesPlugin extends obsidian.Plugin {
                 }
             }));
             this.app.vault.on('rename', (file, oldPath) => __awaiter(this, void 0, void 0, function* () {
-                var _a, _b, _c;
+                var _b, _c, _d, _e;
                 if (!file ||
                     !(file instanceof obsidian.TFile) ||
-                    !(this.ExemplaryOfMD(file.path)) ||
+                    !this.ExemplaryOfMD(file.path) ||
+                    this.ThePathExcluded(String((_b = file.parent) === null || _b === void 0 ? void 0 : _b.path)) ||
                     !this.settings.removeMediaFolder ||
                     this.settings.saveAttE != "nextToNoteS" ||
                     this.settings.pathInTags != "onlyRelative") {
@@ -21152,8 +21187,8 @@ class LocalImagesPlugin extends obsidian.Plugin {
                 let oldRootdir = this.settings.mediaRootDir;
                 if (path__default["default"].basename(oldRootdir).includes("${notename}") &&
                     !oldRootdir.includes("${date}")) {
-                    oldRootdir = oldRootdir.replace("${notename}", (_a = path__default["default"].parse(oldPath)) === null || _a === void 0 ? void 0 : _a.name);
-                    let newRootDir = oldRootdir.replace((_b = path__default["default"].parse(oldPath)) === null || _b === void 0 ? void 0 : _b.name, (_c = path__default["default"].parse(file.path)) === null || _c === void 0 ? void 0 : _c.name);
+                    oldRootdir = oldRootdir.replace("${notename}", (_c = path__default["default"].parse(oldPath)) === null || _c === void 0 ? void 0 : _c.name);
+                    let newRootDir = oldRootdir.replace((_d = path__default["default"].parse(oldPath)) === null || _d === void 0 ? void 0 : _d.name, (_e = path__default["default"].parse(file.path)) === null || _e === void 0 ? void 0 : _e.name);
                     let newRootDir_ = newRootDir;
                     let oldRootdir_ = oldRootdir;
                     oldRootdir_ = pathJoin([(path__default["default"].dirname(oldPath) || ""), oldRootdir]);
@@ -21180,12 +21215,14 @@ class LocalImagesPlugin extends obsidian.Plugin {
             }));
             // Some file has been modified
             this.app.vault.on('modify', (file) => __awaiter(this, void 0, void 0, function* () {
+                var _f;
                 if (!this.newfMoveReq)
                     return;
                 logError("File modified: " + file.path, false);
                 if (!file ||
                     !(file instanceof obsidian.TFile) ||
-                    !(this.ExemplaryOfMD(file.path))) {
+                    this.ThePathExcluded(String((_f = file.parent) === null || _f === void 0 ? void 0 : _f.path)) ||
+                    !this.ExemplaryOfMD(file.path)) {
                     return;
                 }
                 else {
@@ -21260,6 +21297,7 @@ class LocalImagesPlugin extends obsidian.Plugin {
         });
     }
     onPasteFunc(evt = undefined, editor = undefined, info = undefined) {
+        var _a;
         return __awaiter(this, void 0, void 0, function* () {
             if (evt === undefined) {
                 return;
@@ -21271,7 +21309,7 @@ class LocalImagesPlugin extends obsidian.Plugin {
                 const activeFile = this.getCurrentNote();
                 const fItems = evt.clipboardData.files;
                 const tItems = evt.clipboardData.items;
-                if (fItems.length != 0) {
+                if (fItems.length != 0 || this.ThePathExcluded(String((_a = activeFile.parent) === null || _a === void 0 ? void 0 : _a.path))) {
                     return;
                 }
                 for (const key in tItems) {
@@ -21347,6 +21385,13 @@ class LocalImagesPlugin extends obsidian.Plugin {
         var _a, _b;
         const includeRegex = new RegExp(this.settings.includepattern, "i");
         return (((_b = (_a = pat.match(includeRegex)) === null || _a === void 0 ? void 0 : _a.groups) === null || _b === void 0 ? void 0 : _b.canvas) != undefined);
+    }
+    ThePathExcluded(pat) {
+        const includeRegex = new RegExp(this.settings.ExcludedFoldersListRegexp, "i");
+        logError(pat.match(includeRegex));
+        // if (pat.match(includeRegex) != null && trimAny(this.settings.ExcludedFoldersList, [" "]).length != 0){
+        //    showBalloon("The path " + pat + " is excluded in your settings. ", true)}
+        return (pat.match(includeRegex) != null && trimAny(this.settings.ExcludedFoldersList, [" "]).length != 0);
     }
     setupNewMdFilesProcInterval() {
         logError("func setupNewFilesProcInterval: \r\n");

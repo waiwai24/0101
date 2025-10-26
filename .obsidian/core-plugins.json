@@ -18,14 +18,16 @@
   "bookmarks": true,
   "markdown-importer": false,
   "zk-prefixer": false,
-  "random-note": false,
+  "random-note": true,
   "outline": true,
   "word-count": true,
   "slides": true,
   "audio-recorder": false,
   "workspaces": true,
   "file-recovery": true,
-  "publish": true,
+  "publish": false,
   "sync": true,
-  "webviewer": false
+  "webviewer": false,
+  "footnotes": false,
+  "bases": true
 }

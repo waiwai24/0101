@@ -3,6 +3,8 @@
   "attachmentRenameMode": "Only pasted images",
   "collectAttachmentUsedByMultipleNotesMode": "Skip",
   "customTokensStr": "",
+  "defaultImageSize": "",
+  "defaultImageSizeDimension": "width",
   "duplicateNameSeparator": " ",
   "emptyAttachmentFolderBehavior": "DeleteWithEmptyParents",
   "excludePaths": [],
@@ -15,12 +17,12 @@
   "shouldDeleteOrphanAttachments": false,
   "shouldRenameAttachmentFiles": true,
   "shouldRenameAttachmentFolder": true,
-  "shouldRenameAttachmentsToLowerCase": false,
   "shouldRenameCollectedAttachments": false,
-  "specialCharacters": "#^[]|*\\<>:?",
+  "specialCharacters": "#^[]|*\\<>:?/",
   "specialCharactersReplacement": "-",
+  "timeoutInSeconds": 5,
   "treatAsAttachmentExtensions": [
     ".excalidraw.md"
   ],
-  "warningVersion": "8.6.0"
+  "version": "9.17.11"
 }

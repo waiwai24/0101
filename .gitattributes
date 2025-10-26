@@ -1,7 +1,33 @@
-# Auto detect text files and perform LF normalization
-*.md linguist-language=MarkDown
-*.js linguist-language=MarkDown
-*.html linguist-language=MarkDown
+# --- 主体语言强制为 Markdown ---
+*.md linguist-language=Markdown
+*.md linguist-detectable=true
+*.md linguist-documentation=false
+
+# --- 忽略 HTML 文件（避免被误判成主要语言）---
+*.html -linguist-detectable
+*.htm  -linguist-detectable
+
+# --- 忽略图片、二进制文件、生成文件 ---
+*.png  -linguist-detectable
+*.jpg  -linguist-detectable
+*.jpeg -linguist-detectable
+*.webp -linguist-detectable
+*.gif  -linguist-detectable
+*.pdf  -linguist-detectable
+*.xlsx -linguist-detectable
+*.zip  -linguist-detectable
+*.bin  -linguist-detectable
+*.bkp  -linguist-detectable
+
+# --- 忽略 Git / LFS / 临时文件 ---
+.git/* -linguist-vendored
+.gitignore -linguist-vendored
+.gitattributes -linguist-vendored
+*.sample -linguist-vendored
+*.rev -linguist-vendored
+*.pack -linguist-vendored
+*.idx -linguist-vendored
+
 *.zip filter=lfs diff=lfs merge=lfs -text
 *.pdf filter=lfs diff=lfs merge=lfs -text
 *.bin filter=lfs diff=lfs merge=lfs -text
